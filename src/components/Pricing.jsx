@@ -41,7 +41,7 @@ const plans = [
   }
 ];
 
-const Pricing = () => {
+const Pricing = ({ onSelectPlan }) => {
   return (
     <section id="memberships" className="w-full bg-[linear-gradient(180deg,#1c170f_0%,#131211_100%)] overflow-hidden py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative">
@@ -108,6 +108,7 @@ const Pricing = () => {
 
               {/* action button */}
               <button 
+                onClick={() => onSelectPlan && onSelectPlan(plan.name + ' Plan')}
                 className={`mt-auto w-full py-4 rounded-full font-black text-xs xl:text-sm tracking-widest uppercase transition-all duration-300 ${
                   plan.isPopular 
                     ? 'bg-[#dca424] text-black hover:bg-[#b88c1b] hover:shadow-[0_0_20px_rgba(220,164,36,0.4)] hover:-translate-y-1' 
