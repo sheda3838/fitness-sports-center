@@ -5,6 +5,7 @@ import About from './components/About';
 import Services from './components/Services';
 import Trainers from './components/Trainers';
 import Pricing from './components/Pricing';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
 
       {/* Pricing / Membership Section */}
       <Pricing />
+
+      {/* Contact Section */}
+      <Contact />
     </div>
   );
 }
