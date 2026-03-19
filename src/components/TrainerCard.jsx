@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaTwitter } from 'react-icons/fa';
 
-const TrainerCard = ({ trainer, position, onClick }) => {
+const TrainerCard = ({ trainer, position, isInView, onClick }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const isCenter = position === 'center';
 
@@ -37,19 +37,49 @@ const TrainerCard = ({ trainer, position, onClick }) => {
     alignClass = 'items-end text-right pr-6 lg:pr-10 pl-2';
   }
 
+  const cardVariants = {
+    center: { 
+      x: '0%', 
+      y: 0,
+      scale: 1, 
+      zIndex: 10, 
+      opacity: 1,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+    },
+    left: { 
+      x: '-60%', 
+      y: 0,
+      scale: 0.85, 
+      zIndex: 5, 
+      opacity: 1,
+      transition: { duration: 0.5, delay: 0.2, ease: "easeOut" } 
+    },
+    right: { 
+      x: '60%', 
+      y: 0,
+      scale: 0.85, 
+      zIndex: 5, 
+      opacity: 1,
+      transition: { duration: 0.5, delay: 0.2, ease: "easeOut" }
+    },
+    farLeft: { x: '-115%', scale: 0.7, zIndex: 2, opacity: 1, transition: { duration: 0.5, delay: 0.4 } },
+    farRight: { x: '115%', scale: 0.7, zIndex: 2, opacity: 1, transition: { duration: 0.5, delay: 0.4 } },
+    hidden: (pos) => ({
+      opacity: 0,
+      y: 30,
+      scale: pos === 'center' ? 0.9 : 1,
+      x: pos === 'left' ? '-40%' : pos === 'right' ? '40%' : '0%',
+      zIndex: 0
+    })
+  };
+
   return (
     <motion.div
-      variants={{
-         center: { x: '0%', scale: 1, zIndex: 10, opacity: 1 },
-         left: { x: '-60%', scale: 0.85, zIndex: 5, opacity: 1 },
-         right: { x: '60%', scale: 0.85, zIndex: 5, opacity: 1 },
-         farLeft: { x: '-115%', scale: 0.7, zIndex: 2, opacity: 1 },
-         farRight: { x: '115%', scale: 0.7, zIndex: 2, opacity: 1 },
-         hidden: { x: '0%', scale: 0.4, zIndex: 0, opacity: 0 }
-      }}
-      initial={false}
-      animate={position}
-      transition={{ duration: 0.5, type: 'spring', stiffness: 200, damping: 25 }}
+      custom={position}
+      variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? position : "hidden"}
+      whileHover={isCenter ? { scale: 1.03, transition: { duration: 0.2 } } : {}}
       onClick={handleInteraction}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

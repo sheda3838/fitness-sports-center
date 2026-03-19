@@ -7,55 +7,49 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
-  // global viewport settings for professional entrance triggering
-  const viewportConfig = { once: true, margin: "-120px", amount: 0.15 };
+  // Snappy viewport config 
+  const viewportConfig = { once: true, margin: "-80px", amount: 0.2 };
 
-  // professional high-end easing: snappier start, buttery smooth landing
-  const smoothTransitions = { duration: 0.8, ease: [0.16, 1, 0.3, 1] };
+  // Snappy transition 
+  const snappyTransition = { duration: 0.5, ease: "easeOut" };
 
-  // soft fade-up from below (most professional choice)
+  // Variant for upward motion
   const fadeUpVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: smoothTransitions }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: snappyTransition }
   };
 
-  // very subtle side reveals (reduced movement for a premium feel)
-  const fadeLeftVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: smoothTransitions }
+  // Variant for image scale reveal
+  const imageRevealVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
-  const fadeRightVariants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: { opacity: 1, x: 0, transition: smoothTransitions }
-  };
-
-  // staggered container for cascading entrance of child elements
+  // Stagger wrapper for cards
   const staggerContainer = {
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.12,
         delayChildren: 0.1
       }
     }
   };
 
-  // refined soft scale entrance
-  const scaleUpVariants = {
-    hidden: { opacity: 0, scale: 0.94 },
-    visible: { opacity: 1, scale: 1, transition: smoothTransitions }
+  // Specific service card variant
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.97 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: snappyTransition }
   };
 
   return (
     <ThemeContext.Provider value={{
       viewportConfig,
       fadeUpVariants,
-      fadeLeftVariants,
-      fadeRightVariants,
-      staggerContainer,
-      scaleUpVariants
+      imageRevealVariants,
+      cardVariants,
+      staggerContainer
     }}>
       {children}
     </ThemeContext.Provider>

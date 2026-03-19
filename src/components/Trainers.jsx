@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import TrainerCard from './TrainerCard';
+import { useTheme } from '../context/ThemeContext';
 
 const trainersData = [
   {
@@ -51,6 +52,10 @@ const trainersData = [
 const Trainers = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const total = trainersData.length;
+  const { fadeUpVariants, viewportConfig } = useTheme();
+  
+  const sectionRef = React.useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % total);
@@ -63,16 +68,21 @@ const Trainers = () => {
   const setIndex = (index) => setCurrentIndex(index);
 
   return (
-    <section id="trainers" className="w-full bg-[#f4f2ea] overflow-hidden py-24 lg:py-32">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative">
+    <section id="trainers" ref={sectionRef} className="w-full bg-[#f4f2ea] overflow-hidden py-24 lg:py-32">
+      <motion.div 
+        className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative"
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+      >
         
         {/* header */}
-        <div className="mb-14 sm:mb-20 text-center lg:text-left lg:px-12">
+        <motion.div variants={fadeUpVariants} className="mb-14 sm:mb-20 text-center lg:text-left lg:px-12">
           <h3 className="text-[#dca424] font-black tracking-[0.2em] text-[14px] sm:text-[16px] mb-3 leading-none">THE EXPERTS</h3>
           <h2 className="text-[2.5rem] sm:text-[3.2rem] lg:text-[3.8rem] font-black text-[#1a1a1a] leading-[1.1] tracking-tight">
             MEET OUR <span className="text-[#dca424]">TRAINERS</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* interactive 3D carousel container */}
         <div className="relative w-full flex items-center justify-center">
@@ -86,7 +96,7 @@ const Trainers = () => {
             <IoChevronBack size={26} strokeWidth={2} />
           </button>
 
-          {/* swipeable carousel area targeting mobile users */}
+          {/* swipeable carousel area */}
           <motion.div 
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
@@ -111,6 +121,7 @@ const Trainers = () => {
                    key={trainer.id} 
                    trainer={trainer} 
                    position={position} 
+                   isInView={isInView}
                    onClick={() => setIndex(idx)} 
                  />
                );
@@ -140,7 +151,7 @@ const Trainers = () => {
           ))}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };
