@@ -23,14 +23,12 @@ const About = () => {
           
           {/* left column: image container */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
-            <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-none shadow-[15px_25px_60px_-10px_rgba(0,0,0,0.08)] rounded-[1.5rem] sm:rounded-[2rem] bg-[#ead9b1] p-3 sm:p-4 lg:p-4 xl:p-5 transition-transform duration-500 hover:-translate-y-2">
-              <div className="overflow-hidden rounded-[1rem] sm:rounded-[1.4rem] bg-[#1a1a1a] aspect-[4/3] lg:aspect-[4/3] xl:aspect-[5/3]">
-                <img 
-                  src="/about.jpg" 
-                  alt="Modern gym equipment" 
-                  className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
-                />
-              </div>
+            <div className="relative w-full max-w-[28rem] sm:max-w-xl lg:max-w-[105%] xl:max-w-[115%] shadow-[0_20px_80px_-15px_rgba(0,0,0,0.15),_0_0_40px_rgba(0,0,0,0.03)] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden transition-transform duration-500 hover:-translate-y-2 aspect-[4/3] xl:aspect-[1.35/1]">
+              <img 
+                src="/about.jpg" 
+                alt="Modern gym equipment" 
+                className="w-full h-full object-cover scale-[1.02] hover:scale-[1.08] transition-transform duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
+              />
             </div>
           </div>
 
