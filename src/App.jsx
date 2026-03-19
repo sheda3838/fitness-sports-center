@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 
 function App() {
   return (
@@ -11,11 +12,10 @@ function App() {
       {/* Hero Section */}
       <Hero />
 
-      {/* Extra sections just to allow scrolling */}
-      <section id="about" className="h-[80vh] bg-[#1a1917] border-t border-white/5 flex items-center justify-center text-white">
-        <h2 className="text-4xl font-bold">About Us Section</h2>
-      </section>
+      {/* About Us Section */}
+      <About />
       
+      {/* Other sections just to allow scrolling */}
       <section id="services" className="h-[80vh] bg-[#131211] border-t border-white/5 flex items-center justify-center text-white">
         <h2 className="text-4xl font-bold">Services Section</h2>
       </section>
