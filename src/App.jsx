@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import Trainers from './components/Trainers';
+import Pricing from './components/Pricing';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
 
       {/* Trainers Section */}
       <Trainers />
+
+      {/* Pricing / Membership Section */}
+      <Pricing />
     </div>
   );
 }

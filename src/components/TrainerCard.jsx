@@ -6,16 +6,16 @@ const TrainerCard = ({ trainer, position, onClick }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const isCenter = position === 'center';
 
-  // Force non-center cards back to front-facing smoothly
+  // force non-center cards back to front-facing smoothly
   useEffect(() => {
     if (!isCenter) setIsFlipped(false);
   }, [isCenter]);
 
   const handleInteraction = () => {
     if (!isCenter) {
-      onClick(); // Bring clicked side card to the center
+      onClick(); // bring clicked side card to the center
     } else {
-      // Toggle flip on click exclusively for mobile (where hover is absent)
+      // toggle flip on click exclusively for mobile (where hover is absent)
       if (window.innerWidth < 1024) {
         setIsFlipped(!isFlipped);
       }
@@ -62,14 +62,14 @@ const TrainerCard = ({ trainer, position, onClick }) => {
         transition={{ duration: 0.6, type: 'spring', stiffness: 260, damping: 25 }}
         className="w-full h-full relative [transform-style:preserve-3d]"
       >
-        {/* Front Face */}
+        {/* front face */}
         <div 
            className={`absolute inset-0 [backface-visibility:hidden] rounded-3xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.2)] transition-all duration-500 group ${
              !isCenter ? 'grayscale hover:grayscale-0' : 'grayscale-0'
            }`}
         >
            <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover" />
-           {/* Overlay text block */}
+           {/* overlay text block */}
            <div 
              className={`absolute inset-x-0 bottom-0 pt-32 pb-8 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-300 flex flex-col justify-end ${alignClass} ${
                isCenter ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
@@ -80,7 +80,7 @@ const TrainerCard = ({ trainer, position, onClick }) => {
            </div>
         </div>
 
-        {/* Back Face (Details) */}
+        {/* back face (details) */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl overflow-hidden bg-[#1f1d1a] p-6 lg:p-8 flex flex-col justify-center items-center text-center shadow-2xl border-2 border-[#dca424]/40">
            <h4 className="text-white text-xl lg:text-2xl font-black mb-2 uppercase">{trainer.name}</h4>
            <p className="text-[#dca424] font-bold tracking-widest text-xs lg:text-sm mb-6">{trainer.title}</p>

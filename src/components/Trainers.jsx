@@ -66,7 +66,7 @@ const Trainers = () => {
     <section id="trainers" className="w-full bg-[#f4f2ea] overflow-hidden py-24 lg:py-32">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full relative">
         
-        {/* Header */}
+        {/* header */}
         <div className="mb-14 sm:mb-20 text-center lg:text-left lg:px-12">
           <h3 className="text-[#dca424] font-black tracking-[0.2em] text-[14px] sm:text-[16px] mb-3 leading-none">THE EXPERTS</h3>
           <h2 className="text-[2.5rem] sm:text-[3.2rem] lg:text-[3.8rem] font-black text-[#1a1a1a] leading-[1.1] tracking-tight">
@@ -74,10 +74,10 @@ const Trainers = () => {
           </h2>
         </div>
 
-        {/* Interactive 3D Carousel Container */}
+        {/* interactive 3D carousel container */}
         <div className="relative w-full flex items-center justify-center">
            
-          {/* Desktop Left Nav Button */}
+          {/* desktop left nav button */}
           <button 
             onClick={handlePrev} 
             className="hidden lg:flex absolute left-2 xl:left-8 z-20 w-14 h-14 bg-[#dca424] hover:bg-[#b88b1b] text-black rounded-full items-center justify-center transition-transform hover:scale-105 shadow-lg"
@@ -86,7 +86,7 @@ const Trainers = () => {
             <IoChevronBack size={26} strokeWidth={2} />
           </button>
 
-          {/* Swipeable Carousel Area targeting mobile users */}
+          {/* swipeable carousel area targeting mobile users */}
           <motion.div 
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
@@ -98,7 +98,6 @@ const Trainers = () => {
             className="relative w-full h-[350px] sm:h-[450px] lg:h-[550px] flex justify-center items-center"
           >
             {trainersData.map((trainer, idx) => {
-               // Calculate CSS variant state tracking logic including farLeft and farRight properties!
                let position = 'hidden';
                
                if (idx === currentIndex) position = 'center';
@@ -118,7 +117,7 @@ const Trainers = () => {
             })}
           </motion.div>
 
-          {/* Desktop Right Nav Button */}
+          {/* desktop right nav button */}
           <button 
             onClick={handleNext} 
             className="hidden lg:flex absolute right-2 xl:right-8 z-20 w-14 h-14 bg-[#dca424] hover:bg-[#b88b1b] text-black rounded-full items-center justify-center transition-transform hover:scale-105 shadow-lg"
@@ -129,7 +128,7 @@ const Trainers = () => {
 
         </div>
 
-        {/* Mobile Pagination Dots */}
+        {/* mobile pagination dots */}
         <div className="flex justify-center gap-3 mt-12 lg:hidden relative z-20">
           {trainersData.map((_, i) => (
             <button 
