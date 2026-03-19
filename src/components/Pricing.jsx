@@ -1,5 +1,7 @@
 import React from 'react';
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const plans = [
   {
@@ -42,12 +44,20 @@ const plans = [
 ];
 
 const Pricing = ({ onSelectPlan }) => {
+  const { fadeUpVariants, cardVariants, staggerContainer, viewportConfig } = useTheme();
+
   return (
     <section id="memberships" className="w-full bg-[linear-gradient(180deg,#1c170f_0%,#131211_100%)] overflow-hidden py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative">
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 lg:px-8 w-full relative"
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={staggerContainer}
+      >
         
         {/* header */}
-        <div className="mb-16 lg:mb-24 text-center">
+        <motion.div variants={fadeUpVariants} className="mb-16 lg:mb-24 text-center">
           <h3 className="text-[#dca424] font-black tracking-widest text-[14px] sm:text-[16px] mb-4 leading-none uppercase">
             PRICING PLANS
           </h3>
@@ -57,18 +67,19 @@ const Pricing = ({ onSelectPlan }) => {
           <p className="text-[#a8a8a8] text-[15px] sm:text-[17px] max-w-2xl mx-auto font-bold tracking-wide">
             No hidden fees, no complicated contracts. Just straightforward pricing for premium fitness
           </p>
-        </div>
+        </motion.div>
 
         {/* pricing cards */}
         <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-10 lg:gap-6 xl:gap-8 w-full relative z-10">
           
           {plans.map((plan, index) => (
-            <div 
+            <motion.div 
               key={index} 
+              variants={cardVariants}
               className={`relative w-full max-w-sm lg:flex-1 flex flex-col rounded-[1.5rem] bg-[#222222] transition-all duration-500 ease-in-out cursor-pointer hover:-translate-y-2 group ${
                 plan.isPopular 
                   ? 'p-8 lg:p-10 xl:p-12 border-[2px] border-[#dca424] shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.6),_inset_0_0_50px_rgba(220,164,36,0.15)] z-20 hover:lg:scale-[1.08] lg:scale-[1.06]' 
-                  : 'p-8 xl:p-10 border border-white/10 z-10 hover:border-[#dca424]/50 hover:shadow-[0_15px_40px_rgba(0,0,0,0.4),_inset_0_0_30px_rgba(220,164,36,0.1)]'
+                  : 'p-8 xl:p-10 border border-white/10 z-10 hover:border-[#dca424]/50 hover:shadow-[0_15px_40px_rgba(0,0,0,0.4),_inset_0_0_30px_rgba(220,164,36,0.15)]'
               }`}
             >
               {/* popular badge */}
@@ -117,14 +128,16 @@ const Pricing = ({ onSelectPlan }) => {
               >
                 {plan.isPopular ? 'JOIN NOW' : 'SELECT PLAN'}
               </button>
-            </div>
+            </motion.div>
           ))}
 
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };
+
+export default Pricing;
 
 export default Pricing;
