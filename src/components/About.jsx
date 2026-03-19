@@ -54,7 +54,7 @@ const About = () => {
               {stats.map((stat, idx) => (
                 <div 
                   key={idx} 
-                  className="flex flex-row lg:flex-col items-center lg:items-start justify-center lg:justify-center gap-5 lg:gap-2 bg-[#ebe5d3] border-[1.5px] border-[#d8cdb4]/60 rounded-xl py-5 px-6 xl:py-7 xl:px-8 flex-1 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:bg-[#e4ddc8]"
+                  className="flex flex-row lg:flex-col items-center lg:items-start justify-center lg:justify-center gap-5 lg:gap-2 bg-[#ebe5d3] border-[1.5px] border-[#d8cdb4]/60 rounded-xl py-5 px-6 xl:py-7 xl:px-8 flex-1 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:bg-[#e4ddc8] cursor-default lg:cursor-pointer hover:border-[#dca424]/40"
                 >
                   <span className="text-[#dca424] font-black text-[2.5rem] lg:text-[2.6rem] xl:text-[3rem] leading-none tracking-tight">{stat.value}</span>
                   <span className="text-[#847d70] font-black text-[13px] xl:text-[14px] tracking-[0.15em] leading-none pt-1">{stat.label}</span>

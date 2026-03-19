@@ -65,10 +65,10 @@ const Pricing = ({ onSelectPlan }) => {
           {plans.map((plan, index) => (
             <div 
               key={index} 
-              className={`relative w-full max-w-sm lg:flex-1 flex flex-col rounded-[1.5rem] bg-[#222222] transition-transform duration-500 ease-in-out ${
+              className={`relative w-full max-w-sm lg:flex-1 flex flex-col rounded-[1.5rem] bg-[#222222] transition-all duration-500 ease-in-out cursor-pointer hover:-translate-y-2 group ${
                 plan.isPopular 
-                  ? 'p-8 lg:p-10 xl:p-12 border-[2px] border-[#dca424] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 lg:scale-[1.06]' 
-                  : 'p-8 xl:p-10 border border-white/10 z-10'
+                  ? 'p-8 lg:p-10 xl:p-12 border-[2px] border-[#dca424] shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.6),_inset_0_0_50px_rgba(220,164,36,0.15)] z-20 hover:lg:scale-[1.08] lg:scale-[1.06]' 
+                  : 'p-8 xl:p-10 border border-white/10 z-10 hover:border-[#dca424]/50 hover:shadow-[0_15px_40px_rgba(0,0,0,0.4),_inset_0_0_30px_rgba(220,164,36,0.1)]'
               }`}
             >
               {/* popular badge */}
