@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 import { FaInstagram, FaTwitter, FaWhatsapp, FaFacebookF, FaRegCopyright } from 'react-icons/fa';
 
 const SocialIcons = () => (
@@ -19,9 +21,17 @@ const SocialIcons = () => (
 );
 
 const Footer = () => {
+  const { fadeUpVariants, viewportConfig } = useTheme();
+
   return (
     <footer className="w-full bg-[linear-gradient(180deg,#0a0a0a_0%,#1f1a10_100%)] text-white pt-20 lg:pt-28 pb-10 border-t border-[#2d281d]">
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+      <motion.div 
+        className="max-w-[1300px] mx-auto px-6 lg:px-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={fadeUpVariants}
+      >
         
         {/* main footer grid layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-12 lg:gap-8">
@@ -83,7 +93,7 @@ const Footer = () => {
           <FaRegCopyright className="text-[#dca424]" size={16} /> All Rights Reserved.
         </div>
 
-      </div>
+      </motion.div>
     </footer>
   );
 };

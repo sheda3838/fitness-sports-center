@@ -140,4 +140,3 @@ const Pricing = ({ onSelectPlan }) => {
 
 export default Pricing;
 
-export default Pricing;

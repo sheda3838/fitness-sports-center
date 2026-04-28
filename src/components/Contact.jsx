@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 import { FiMapPin, FiPhone, FiMail, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 
 // reusable contact information block component
 const ContactInfoItem = ({ icon: Icon, label, value }) => (
-  <div className="flex items-start gap-5 mb-8 group cursor-pointer">
+  <motion.div variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }} className="flex items-start gap-5 mb-8 group cursor-pointer">
     <div className="flex-shrink-0 w-12 h-12 bg-[#ebd5a0]/40 rounded-full flex items-center justify-center text-[#dca424] transition-transform duration-300 group-hover:scale-110">
       <Icon size={22} className="text-[#dca424]" strokeWidth={2.5} />
     </div>
@@ -11,12 +13,12 @@ const ContactInfoItem = ({ icon: Icon, label, value }) => (
       <h5 className="text-[#999999] text-[11px] font-black tracking-[0.2em] uppercase mb-1.5 transition-colors group-hover:text-[#dca424]">{label}</h5>
       <p className="text-[#2d2d2d] font-black text-[15px] leading-snug max-w-[280px] transition-colors duration-300">{value}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 // reusable advanced input field component
 const InputField = ({ label, name, type = "text", placeholder, options, rows, value, onChange }) => (
-  <div className="flex flex-col mb-6 w-full group">
+  <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }} className="flex flex-col mb-6 w-full group">
     <label className="text-[#888] text-[11px] font-black tracking-widest uppercase mb-2 ml-1 group-focus-within:text-[#dca424] transition-colors">{label}</label>
     
     {type === "select" ? (
@@ -57,10 +59,11 @@ const InputField = ({ label, name, type = "text", placeholder, options, rows, va
         className="w-full bg-[#fdfdfc] border-[1.5px] border-[#eae4d5] text-[#333] text-[14px] font-bold rounded-xl px-5 py-4 outline-none focus:border-[#dca424] focus:ring-2 focus:ring-[#dca424]/20 transition-all placeholder-[#b0b0b0]"
       />
     )}
-  </div>
+  </motion.div>
 );
 
 const Contact = ({ selectedPlan }) => {
+  const { fadeUpVariants, cardVariants, staggerContainer, viewportConfig } = useTheme();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -118,12 +121,18 @@ const Contact = ({ selectedPlan }) => {
 
   return (
     <section id="contact" className="w-full bg-[#f4f2ea] py-24 lg:py-32">
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
+      <motion.div 
+        className="max-w-[1300px] mx-auto px-6 lg:px-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={staggerContainer}
+      >
         
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 xl:gap-28">
           
           {/* left column: text & contact information */}
-          <div className="w-full lg:w-5/12 flex flex-col pt-2 lg:pt-8">
+          <motion.div variants={fadeUpVariants} className="w-full lg:w-5/12 flex flex-col pt-2 lg:pt-8">
             <h3 className="text-[#dca424] font-black tracking-[0.2em] text-[15px] sm:text-[16px] mb-4 leading-none uppercase">
               GET IN TOUCH
             </h3>
@@ -151,10 +160,10 @@ const Contact = ({ selectedPlan }) => {
                 value="sportscenter@gym.com" 
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* right column: form card container */}
-          <div className="w-full lg:w-7/12 flex-shrink-0 relative">
+          <motion.div variants={cardVariants} className="w-full lg:w-7/12 flex-shrink-0 relative">
             
             {/* Success Overlay state triggered upon successful fetch */}
             {submitStatus === 'success' && (
@@ -170,10 +179,10 @@ const Contact = ({ selectedPlan }) => {
               <form onSubmit={handleSubmit} className="w-full">
                 
                 {submitStatus === 'error' && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3 text-red-600">
+                   <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3 text-red-600">
                     <FiAlertCircle className="flex-shrink-0 mt-0.5" size={18} />
                     <p className="text-sm font-bold">Oops! There was a problem submitting your form. Did you remember to add your Formspree endpoint?</p>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* dynamically grouped side-by-side inputs on tablet/desktop */}
@@ -227,10 +236,10 @@ const Contact = ({ selectedPlan }) => {
               </form>
 
             </div>
-          </div>
+          </motion.div>
           
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
